@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">Popular Movies</string>
+    <string name="movie" translatable="false">movie</string>
+
+    <string name="fake_movie_title" translatable="false">Logan</string>
+    <string name="fake_movie_plot" translatable="false">In the near future, a weary Logan cares for an ailing Professor X in a hideout on the Mexican border. But Logan\'s attempts to hide from the world and his legacy are upended when a young mutant arrives, pursued by dark forces.</string>
+    <string name="fake_movie_date" translatable="false">2017-02-28</string>
+    <string name="fake_movie_rating" translatable="false">7.5</string>
+    <string name="sort_type" translatable="false">sort_type</string>
+    <string-array name="movie_sort">
+        <item>Most Popular</item>
+        <item>Top Rated</item>
+    </string-array>
+</resources>
