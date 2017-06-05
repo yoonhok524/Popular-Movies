@@ -1,7 +1,6 @@
 package com.youknow.popularmovies;
 
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -10,19 +9,21 @@ import android.widget.ArrayAdapter;
 import android.widget.GridView;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
+import android.widget.TextView;
 
+import com.youknow.popularmovies.details.MovieActivity;
 import com.youknow.popularmovies.model.Movie;
-import com.youknow.popularmovies.utilities.MovieCrawler;
 
 import java.util.List;
 
 import static com.youknow.popularmovies.utilities.MovieCrawler.MOST_POPULAR;
 
-public class MainActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+public class MainActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener, AsyncTaskCompleteListener {
 
     ProgressBar mProgressBar;
     Spinner mSpnSortOrder;
     GridView mGridMovies;
+    TextView mTvErrorMessage;
     ImageAdapter mImageAdapter;
 
     @Override
@@ -36,6 +37,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         mSpnSortOrder.setAdapter(adapter);
         mSpnSortOrder.setOnItemSelectedListener(this);
+        mTvErrorMessage = (TextView) findViewById(R.id.tvErrorMessage);
 
         mGridMovies = (GridView) findViewById(R.id.grid_movies);
         mImageAdapter = new ImageAdapter(this);
@@ -50,12 +52,12 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             }
         });
 
-        new FetchMovieTask().execute(MOST_POPULAR);
+        new FetchMovieTask(this).execute(MOST_POPULAR);
     }
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
-        new FetchMovieTask().execute(pos);
+        new FetchMovieTask(this).execute(pos);
     }
 
     @Override
@@ -63,29 +65,17 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
     }
 
-    public class FetchMovieTask extends AsyncTask<Integer, Void, List<Movie>> {
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-            mProgressBar.setVisibility(View.VISIBLE);
-        }
-
-        @Override
-        protected List<Movie> doInBackground(Integer... params) {
-            int type;
-            if (params == null || params.length == 0) {
-                type = MOST_POPULAR;
-            } else {
-                type = params[0];
-            }
-
-            return MovieCrawler.getMovies(type);
-        }
-
-        @Override
-        protected void onPostExecute(List<Movie> movies) {
-            mImageAdapter.setMoviesList(movies);
-            mProgressBar.setVisibility(View.INVISIBLE);
-        }
+    @Override
+    public void enableProgressBar(boolean enable) {
+        int visible = enable ? View.VISIBLE : View.INVISIBLE;
+        mProgressBar.setVisibility(visible);
     }
+
+    @Override
+    public void onLoadedMovies(List<Movie> movies) {
+        int visible = (movies == null || movies.isEmpty()) ? View.VISIBLE : View.INVISIBLE;
+        mTvErrorMessage.setVisibility(visible);
+        mImageAdapter.setMoviesList(movies);
+    }
+
 }

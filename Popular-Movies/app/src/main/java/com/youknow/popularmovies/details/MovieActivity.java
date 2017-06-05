@@ -1,4 +1,4 @@
-package com.youknow.popularmovies;
+package com.youknow.popularmovies.details;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,6 +7,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
+import com.youknow.popularmovies.R;
 import com.youknow.popularmovies.model.Movie;
 
 public class MovieActivity extends AppCompatActivity {
