@@ -3,22 +3,27 @@ package com.youknow.popularmovies;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.GridView;
 import android.widget.ProgressBar;
+import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.youknow.popularmovies.details.MovieActivity;
 import com.youknow.popularmovies.model.Movie;
+import com.youknow.popularmovies.model.datasource.MoviesContract;
 
 import java.util.List;
 
 import static com.youknow.popularmovies.utilities.MovieCrawler.MOST_POPULAR;
 
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener, AsyncTaskCompleteListener {
+
+    private static final int FAVORITE = 2;
 
     ProgressBar mProgressBar;
     Spinner mSpnSortOrder;
@@ -52,7 +57,12 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             }
         });
 
-        new FetchMovieTask(this).execute(MOST_POPULAR);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        new FetchMovieTask(this).execute(mSpnSortOrder.getSelectedItemPosition());
     }
 
     @Override

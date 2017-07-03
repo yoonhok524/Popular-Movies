@@ -8,8 +8,22 @@
     <string name="fake_movie_date" translatable="false">2017-02-28</string>
     <string name="fake_movie_rating" translatable="false">7.5</string>
     <string name="sort_type" translatable="false">sort_type</string>
+    <string name="trailers">Trailers</string>
+    <string name="favorites">Favorites</string>
+    <string name="top_rated">Top Rated</string>
+    <string name="most_popular">Most Popular</string>
+    <string name="add_to_favorite">Add to Favorite</string>
+    <string name="fake_trailer_name">Official Comic-Con Trailer</string>
+    <string name="reviews">Reviews</string>
+    <string name="fake_review_author">Yoonho</string>
+    <string name="fake_review_content">"I'd just like to thank Patty Jenkins for making a DCI Thought She Was With Universe movie that wasn't fucking garbage. If I'm being completely honest, the two people I went to the cinema to watch _Wonder Woman_ with and I did spend the next two hours after coming out of our screening discussing the various problems with the movie, but we also all agreed on one thing: We still loved it. Maybe it's just the rose-coloured glasses of comparison, but I had an excellent time with _Wonder Woman_, and I'm excited to go back to the cinema and watch it, at least one more time. It's the first time I've said that about a DC movie since _The Dark Knight Rises_. Final rating:★★★½ - I strongly recommend you make the time._"</string>
+    <string name="plot">Plot</string>
+    <string name="register_favorite">%1$s is registered as my favorite movie</string>
+    <string name="unregister_favorite">%1$s is unregistered as my favorite movie</string>
+
     <string-array name="movie_sort">
-        <item>Most Popular</item>
-        <item>Top Rated</item>
+        <item>@string/most_popular</item>
+        <item>@string/top_rated</item>
+        <item>@string/favorites</item>
     </string-array>
 </resources>

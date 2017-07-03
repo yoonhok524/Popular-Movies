@@ -57,7 +57,6 @@ public class ImageAdapter extends BaseAdapter {
 
         ImageView imgView = (ImageView) convertView.findViewById(R.id.movie_poster);
         Picasso.with(mContext).load(posterUrl).into(imgView);
-        Log.d("TEST", posterUrl);
         return convertView;
     }
 

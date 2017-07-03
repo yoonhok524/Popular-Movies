@@ -26,7 +26,7 @@ public class Movie implements Serializable {
 
     public Movie(String id, String posterPath, String title, String popularity, String voteAverage, String overview, String releaseDate) {
         this.id = id;
-        this.posterPath = POSTER_BASE_URL + SIZE_500 + posterPath;
+        this.posterPath = posterPath;
         this.title = title;
         this.popularity = popularity;
         this.voteAverage = voteAverage;
@@ -60,5 +60,18 @@ public class Movie implements Serializable {
 
     public String getReleaseDate() {
         return this.releaseDate;
+    }
+
+    @Override
+    public String toString() {
+        return "Movie{" +
+                "id='" + id + '\'' +
+                ", posterPath='" + posterPath + '\'' +
+                ", title='" + title + '\'' +
+                ", popularity='" + popularity + '\'' +
+                ", voteAverage='" + voteAverage + '\'' +
+                ", overview='" + overview + '\'' +
+                ", releaseDate='" + releaseDate + '\'' +
+                '}';
     }
 }
