@@ -27,10 +27,6 @@ public class ImageAdapter extends BaseAdapter {
         this.mContext = context;
     }
 
-    public void setImageList(List<String> imgList) {
-        notifyDataSetChanged();
-    }
-
     @Override
     public int getCount() {
         return mMoviesList.size();

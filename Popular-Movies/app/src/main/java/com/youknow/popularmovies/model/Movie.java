@@ -1,11 +1,14 @@
 package com.youknow.popularmovies.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.io.Serializable;
 
 /**
  * Created by owner on 2017-06-04.
  */
-public class Movie implements Serializable {
+public class Movie implements Parcelable {
 
     public static final String POSTER_BASE_URL = "http://image.tmdb.org/t/p/";
     public static final String SIZE_92 = "w92";
@@ -74,4 +77,42 @@ public class Movie implements Serializable {
                 ", releaseDate='" + releaseDate + '\'' +
                 '}';
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.id);
+        dest.writeString(this.posterPath);
+        dest.writeString(this.title);
+        dest.writeString(this.popularity);
+        dest.writeString(this.voteAverage);
+        dest.writeString(this.overview);
+        dest.writeString(this.releaseDate);
+    }
+
+    protected Movie(Parcel in) {
+        this.id = in.readString();
+        this.posterPath = in.readString();
+        this.title = in.readString();
+        this.popularity = in.readString();
+        this.voteAverage = in.readString();
+        this.overview = in.readString();
+        this.releaseDate = in.readString();
+    }
+
+    public static final Parcelable.Creator<Movie> CREATOR = new Parcelable.Creator<Movie>() {
+        @Override
+        public Movie createFromParcel(Parcel source) {
+            return new Movie(source);
+        }
+
+        @Override
+        public Movie[] newArray(int size) {
+            return new Movie[size];
+        }
+    };
 }

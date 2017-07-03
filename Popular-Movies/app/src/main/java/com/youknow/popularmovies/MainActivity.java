@@ -2,6 +2,7 @@ package com.youknow.popularmovies;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -17,6 +18,7 @@ import com.youknow.popularmovies.details.MovieActivity;
 import com.youknow.popularmovies.model.Movie;
 import com.youknow.popularmovies.model.datasource.MoviesContract;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static com.youknow.popularmovies.utilities.MovieCrawler.MOST_POPULAR;
@@ -30,6 +32,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     GridView mGridMovies;
     TextView mTvErrorMessage;
     ImageAdapter mImageAdapter;
+    boolean isLoaded = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +49,11 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
         mGridMovies = (GridView) findViewById(R.id.grid_movies);
         mImageAdapter = new ImageAdapter(this);
+        if (savedInstanceState != null) {
+            mImageAdapter.setMoviesList(savedInstanceState.<Movie>getParcelableArrayList(getString(R.string.key_movies)));
+            isLoaded = true;
+        }
+
         mGridMovies.setAdapter(mImageAdapter);
         mGridMovies.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -56,13 +64,21 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 startActivity(intent);
             }
         });
-
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        new FetchMovieTask(this).execute(mSpnSortOrder.getSelectedItemPosition());
+
+        if (!isLoaded) {
+            new FetchMovieTask(this).execute(mSpnSortOrder.getSelectedItemPosition());
+        }
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putParcelableArrayList(getString(R.string.key_movies), (ArrayList<? extends Parcelable>) mImageAdapter.getMoviesList());
     }
 
     @Override
