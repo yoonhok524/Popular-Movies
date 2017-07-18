@@ -4,7 +4,7 @@ This is project for [Udacity Android nanodegree](https://www.udacity.com/course/
 ----
 
 
-This app fetch the movie data from [theMovieDB](www.themoviedb.org).<br />
+This app fetch the movie data from [theMovieDB](http://www.themoviedb.org).<br />
 It shows some movie poster image as grid view.<br />
 You can select the movie list based on latest, rating or your favorite.<br />
 This means that you can manage your favorite movies using this app.<br />
