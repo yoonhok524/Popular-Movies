@@ -1,7 +1,7 @@
 # Popular-Movies
 
 This is project for [Udacity Android nanodegree](https://www.udacity.com/course/android-developer-nanodegree-by-google--nd801)
-====================================================
+----
 
 
 This app fetch the movie data from [theMovieDB](www.themoviedb.org).<br />
